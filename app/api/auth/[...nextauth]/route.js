@@ -27,7 +27,7 @@ const authOptions = {
       return token;
     },
     async signIn({ user, account, profile, email, credentials }) {
-      return 'https://chat.openai.com/aip/g-4743d95c95517fc867c7493f1948fd9144bd9c0c/oauth/callback';
+      return true;
     }
   }
 };
