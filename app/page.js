@@ -1,31 +1,26 @@
 import { getUserSession } from "@/lib/session";
 import Link from "next/link";
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
   const user = await getUserSession();
   return (
     <main className="">
-      {user ? (
-        <div>
-          <p className="mb-3">Name: {user.name}</p>
-          <p className="mb-3">Email: {user.email}</p>
-          <p>Image: {user.image}</p>
-          <a href="/api/auth/signout">Sign Out</a>
-          <div className="p-[30px]">
-            <Link
-              href="/chat"
-              className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded w-[200px] h-[80px]"
-            >
-              Obtener Mensajes
+      <section className="w-full h-screen bg-white flex items-center justify-center">
+        <div className="text-center space-y-4 flex flex-col">
+          <h1 className="text-5xl font-serif text-black">Welcome to Our Website</h1>
+          <p className="text-xl font-serif text-black max-w-md mx-auto">
+            We offer the best services. Join us and be part of our amazing community.
+          </p>
+          {user ? (
+            redirect('/chat')
+          ) : (
+            <Link href="/api/auth/signin" className="self-center bg-white text-black hover:bg-gray-100 transition-all duration-300 ease-in-out my-3 py-3 px-8 rounded-lg text-2xl font-serif border border-slate-500 shadow-none">
+              Obtener Resumen
             </Link>
-          </div>
+          )}
         </div>
-      ) : (
-        <div>
-          <p>unauthorized</p>
-          <a href="/api/auth/signin">Sign In</a>
-        </div>
-      )}
+      </section>
     </main>
   );
 }
