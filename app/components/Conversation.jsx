@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import parse from 'html-react-parser';
 
 export function Conversation() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,10 @@ export function Conversation() {
     const input = [
       {
         role: "user",
-        content: `Dame un resumen de mis mensajes: ${message?.messages}`,
+        content: `Usa etiquetas <b> y <br /> de html para formatear la información. 
+        Como en el siguiente ejemplo:
+        <b>{Titulo del correo}</b> <p>{cuerpo del mensaje}</p> <br />,
+        Dame un resumen de mis mensajes: ${message?.messages}`,
       },
     ];
 
@@ -73,7 +77,7 @@ export function Conversation() {
           Dame un resumen de mi día
         </button>
       </form>
-      <div>{isLoading ? <p>Loading...</p> : <p>{responseData}</p>}</div>
+      <div>{isLoading ? <p>Loading...</p> : <p>{responseData && parse(responseData)}</p>}</div>
     </section>
   );
 }
