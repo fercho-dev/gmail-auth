@@ -7,7 +7,6 @@ import { Header } from "../components/Header";
 function Chat() {
   return (
     <div>
-      <Header />
       <Conversation />
     </div>
   );

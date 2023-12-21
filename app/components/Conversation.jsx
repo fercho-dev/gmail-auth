@@ -31,9 +31,15 @@ export function Conversation() {
     const input = [
       {
         role: "user",
-        content: `Usa etiquetas <b> y <br /> de html para formatear la información. 
+        content: `Agrega siempre al principio la frase: "<h1>Aquí tienes un resumen de tu día...</h1><br />"
+        Para los correos usa etiquetas <b> y <br /> de html para formatear la información. 
         Como en el siguiente ejemplo:
         <b>{Titulo del correo}</b> <p>{cuerpo del mensaje}</p> <br />,
+        y al final del resumen de cada mensaje, agrega un parrafo de máximo 5 renglones 
+        con el resumen de todos los mensajes.
+        Por ejemplo:
+        "Hoy recibiste un mensaje de juan acerca de tu cita en el dentista, y otro de una 
+        promoción de tu tarjeta de crédito, etc."
         Dame un resumen de mis mensajes: ${message?.messages}`,
       },
     ];
@@ -68,7 +74,7 @@ export function Conversation() {
   };
 
   return (
-    <section className="w-full flex min-h-screen p-4 gap-[50px]">
+    <section className="w-[1000px] flex min-h-screen p-4 gap-[50px]">
       <form onSubmit={handleSubmit}>
         <button
           type="submit"
