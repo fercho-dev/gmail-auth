@@ -78,9 +78,9 @@ export function Conversation() {
       <form onSubmit={handleSubmit}>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded w-[200px] h-[80px]"
+          className="bg-black text-white hover:bg-slate-700 transition-all duration-300 ease-in-out my-3 py-3 px-8 rounded-lg text-2xl font-serif border border-slate-500 shadow-none"
         >
-          Dame un resumen de mi día
+          Generar resumen
         </button>
       </form>
       <div>{isLoading ? <p>Loading...</p> : <p>{responseData && parse(responseData)}</p>}</div>
