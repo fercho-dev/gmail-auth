@@ -1,7 +1,24 @@
-import { getUserSession } from "@/lib/session";
+import { useEffect, useState } from 'react';
 
-export async function Header() {
-  const user = await getUserSession();
+export function Header() {
+  const [user, setUser] = useState({ name: '', image: '' });
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/user");
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    }
+
+    fetchUser();
+  }, []);
 
   return (
     <header className="flex items-center justify-between p-4 bg-white border-b border-black">
