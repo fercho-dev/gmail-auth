@@ -23,6 +23,7 @@ const authOptions = {
     jwt: async ({ token, account }) => {
       if (account?.access_token) {
         token.access_token = account.access_token;
+        token.expires_at = account.expires_at;
       }
       return token;
     },

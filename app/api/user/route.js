@@ -7,6 +7,6 @@ export async function GET(req) {
   if (!user) {
     return NextResponse.json({ });
   } else {
-    return NextResponse.json({name: user.name, image: user.image});
+    return NextResponse.json({name: user.name, image: user.image, expires_at: user.expires_at});
   }
 }
