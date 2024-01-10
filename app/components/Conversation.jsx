@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import parse from 'html-react-parser';
 
 export function Conversation() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,16 @@ export function Conversation() {
     const input = [
       {
         role: "user",
-        content: `Dame un resumen de mis mensajes: ${message?.messages}`,
+        content: `Agrega siempre al principio la frase: "<h1>Aquí tienes un resumen de tu día...</h1><br />"
+        Para los correos usa etiquetas <b> y <br /> de html para formatear la información. 
+        Como en el siguiente ejemplo:
+        <b>{Titulo del correo}</b> <p>{cuerpo del mensaje}</p> <br />,
+        y al final del resumen de cada mensaje, agrega un parrafo de máximo 5 renglones 
+        con el resumen de todos los mensajes.
+        Por ejemplo:
+        "Hoy recibiste un mensaje de juan acerca de tu cita en el dentista, y otro de una 
+        promoción de tu tarjeta de crédito, etc."
+        Dame un resumen de mis mensajes: ${message?.messages}`,
       },
     ];
 
@@ -64,16 +74,16 @@ export function Conversation() {
   };
 
   return (
-    <section className="w-full flex min-h-screen p-4 gap-[50px]">
+    <section className="w-[1000px] flex min-h-screen p-4 gap-[50px]">
       <form onSubmit={handleSubmit}>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded w-[200px] h-[80px]"
+          className="bg-black text-white hover:bg-slate-700 transition-all duration-300 ease-in-out my-3 py-3 px-8 rounded-lg text-2xl font-serif border border-slate-500 shadow-none"
         >
-          Dame un resumen de mi día
+          Generar resumen
         </button>
       </form>
-      <div>{isLoading ? <p>Loading...</p> : <p>{responseData}</p>}</div>
+      <div>{isLoading ? <p>Loading...</p> : <p>{responseData && parse(responseData)}</p>}</div>
     </section>
   );
 }
